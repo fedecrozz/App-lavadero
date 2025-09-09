@@ -68,6 +68,36 @@ body {
     color: #667eea;
 }
 
+/* Enlaces de Instagram */
+.instagram-link {
+    color: #E1306C;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.instagram-link:hover {
+    color: #C13584;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.instagram-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(45deg, #E1306C, #C13584, #833AB4);
+    transition: width 0.3s ease;
+}
+
+.instagram-link:hover::after {
+    width: 100%;
+}
+
 /* Main */
 .main {
     padding: 2rem 0;
