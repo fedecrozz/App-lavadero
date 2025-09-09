@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lavados Artesanales - Solicitar Turno</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-car-wash"></i>
+                <h1>Lavados Artesanales</h1>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>11-2595-8416</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>@lavados_artesanales1</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="form-container">
+                <h2>Solicitar Turno</h2>
+                <p class="subtitle">Completa los datos para solicitar tu turno de lavado</p>
+                
+                <form id="appointmentForm" class="appointment-form">
+                    <!-- Información del vehículo -->
+                    <div class="form-section">
+                        <h3>Información del Vehículo</h3>
+                        
+                        <div class="form-group">
+                            <label for="vehicleModel">Modelo del vehículo:</label>
+                            <input type="text" id="vehicleModel" name="vehicleModel" required placeholder="Ej: Ford Fiesta 2020">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vehicleType">Clasificación:</label>
+                            <select id="vehicleType" name="vehicleType" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="moto">Moto</option>
+                                <option value="auto" selected>Auto</option>
+                                <option value="suv">SUV</option>
+                                <option value="pickup">Pickup</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Tipo de lavado -->
+                    <div class="form-section">
+                        <h3>Tipo de Lavado</h3>
+                        
+                        <div class="wash-types">
+                            <div class="wash-option" data-type="estandar">
+                                <input type="radio" id="estandar" name="washType" value="estandar">
+                                <label for="estandar" class="wash-card">
+                                    <div class="wash-header">
+                                        <h4>Lavado Estándar</h4>
+                                        <span class="price">$20.000</span>
+                                    </div>
+                                    <p class="wash-description">
+                                        Lavado de mantenimiento, este es el lavado perfecto para mantener impecable tu vehículo luego de realizarle una buena limpieza detallada.
+                                    </p>
+                                </label>
+                            </div>
+
+                            <div class="wash-option featured" data-type="plus">
+                                <input type="radio" id="plus" name="washType" value="plus" checked>
+                                <label for="plus" class="wash-card">
+                                    <div class="wash-header">
+                                        <h4>Lavado Plus</h4>
+                                        <span class="price">$30.000</span>
+                                        <span class="badge">MÁS PEDIDO</span>
+                                    </div>
+                                    <p class="wash-description">
+                                        El lavado más pedido. Ideal para hacerlo luego de que tu vehículo haya estado mucho tiempo sin mantener, le devolvemos el brillo tanto por dentro como por fuera teniendo un excelente nivel de detalle.
+                                    </p>
+                                </label>
+                            </div>
+
+                            <div class="wash-option" data-type="premium">
+                                <input type="radio" id="premium" name="washType" value="premium">
+                                <label for="premium" class="wash-card">
+                                    <div class="wash-header">
+                                        <h4>Lavado Premium</h4>
+                                        <span class="price">$50.000</span>
+                                    </div>
+                                    <p class="wash-description">
+                                        Lavado Reset. El lavado que tu auto necesita para dejarlo eliminar todo tipo de suciedad del interior incluyendo butacas, alfombras y también un pulido con cera que deja tu pintura brillante por varios meses. Este lavado es ideal hacerlo una vez cada tanto y luego mantenerlo con lavados de mantenimiento cada una o dos semanas.
+                                    </p>
+                                </label>
+                            </div>
+
+                            <div class="wash-option" data-type="personalizado">
+                                <input type="radio" id="personalizado" name="washType" value="personalizado">
+                                <label for="personalizado" class="wash-card">
+                                    <div class="wash-header">
+                                        <h4>Lavado Personalizado</h4>
+                                        <span class="price">Desde $20.000</span>
+                                    </div>
+                                    <p class="wash-description">
+                                        Selecciona únicamente los servicios que necesitas para tu vehículo. Incluye lavado estándar como base.
+                                    </p>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Servicios personalizados -->
+                    <div class="form-section" id="customServices" style="display: none;">
+                        <h3>Servicios Personalizados</h3>
+                        <div class="custom-services-grid">
+                            <div class="service-item base-service">
+                                <input type="checkbox" id="lavado-estandar" name="customServices" value="lavado-estandar" checked disabled>
+                                <label for="lavado-estandar">Lavado Estándar (Base) ✓</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="limpieza-butacas" name="customServices" value="limpieza-butacas">
+                                <label for="limpieza-butacas">Limpieza de butacas</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="limpieza-alfombras" name="customServices" value="limpieza-alfombras">
+                                <label for="limpieza-alfombras">Limpieza de alfombras</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="detallado-frenos" name="customServices" value="detallado-frenos">
+                                <label for="detallado-frenos">Detallado de frenos</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="pulido-opticas" name="customServices" value="pulido-opticas">
+                                <label for="pulido-opticas">Pulido de ópticas</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="pulido-cera" name="customServices" value="pulido-cera">
+                                <label for="pulido-cera">Pulido con cera</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="limpieza-techo" name="customServices" value="limpieza-techo">
+                                <label for="limpieza-techo">Limpieza de techo</label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="lavado-motor" name="customServices" value="lavado-motor">
+                                <label for="lavado-motor">Lavado de motor</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resumen del pedido -->
+                    <div class="form-section">
+                        <div class="order-summary">
+                            <h3>Resumen del Pedido</h3>
+                            <div class="summary-content">
+                                <div class="summary-item">
+                                    <span>Vehículo:</span>
+                                    <span id="summaryVehicle">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Tipo de lavado:</span>
+                                    <span id="summaryWashType">Lavado Plus</span>
+                                </div>
+                                <div class="summary-item" id="summaryServices" style="display: none;">
+                                    <span>Servicios adicionales:</span>
+                                    <span id="summaryServicesList">-</span>
+                                </div>
+                                <div class="summary-total">
+                                    <span>Subtotal:</span>
+                                    <span id="summaryTotal">$30.000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fab fa-whatsapp"></i>
+                        Solicitar Turno por WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fab fa-whatsapp"></i> 11-2595-8416</p>
+                    <p><i class="fab fa-instagram"></i> @lavados_artesanales1</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Ubicaciones</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Los Polvorines</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Villa de Mayo</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
