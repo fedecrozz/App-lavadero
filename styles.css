@@ -52,14 +52,15 @@ body {
 
 .contact-info {
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #666;
 }
 
@@ -514,4 +515,69 @@ body {
     cursor: not-allowed;
     font-weight: 600;
     color: #667eea;
+}
+
+/* Selección de contactos */
+.contact-subtitle {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.contact-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.contact-option {
+    position: relative;
+}
+
+.contact-option input[type="radio"] {
+    display: none;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    text-decoration: none;
+}
+
+.contact-card:hover {
+    border-color: #25d366;
+    background: rgba(37, 211, 102, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.15);
+}
+
+.contact-option input[type="radio"]:checked + .contact-card {
+    border-color: #25d366;
+    background: rgba(37, 211, 102, 0.1);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.2);
+}
+
+.contact-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 0.3rem 0;
+}
+
+.contact-number {
+    font-size: 0.9rem;
+    color: #25d366;
+    font-weight: 500;
+}
+
+.contact-card i {
+    font-size: 1.5rem;
+    color: #25d366;
 }

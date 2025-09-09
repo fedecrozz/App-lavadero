@@ -22,6 +22,7 @@ const vehicleModelInput = document.getElementById('vehicleModel');
 const washTypeInputs = document.querySelectorAll('input[name="washType"]');
 const customServicesSection = document.getElementById('customServices');
 const customServiceInputs = document.querySelectorAll('input[name="customServices"]');
+const contactChoiceInputs = document.querySelectorAll('input[name="contactChoice"]');
 const appointmentForm = document.getElementById('appointmentForm');
 
 // Elementos del resumen
@@ -191,8 +192,9 @@ function handleFormSubmit(event) {
     const vehicleModel = formData.get('vehicleModel');
     const vehicleType = formData.get('vehicleType');
     const washType = formData.get('washType');
+    const contactChoice = formData.get('contactChoice');
     
-    if (!vehicleModel || !vehicleType || !washType) {
+    if (!vehicleModel || !vehicleType || !washType || !contactChoice) {
         alert('Por favor completa todos los campos obligatorios.');
         return;
     }
@@ -200,8 +202,14 @@ function handleFormSubmit(event) {
     // Generar mensaje para WhatsApp
     const message = generateWhatsAppMessage(formData);
     
-    // Enviar a WhatsApp
-    const whatsappNumber = '1125958416';
+    // Obtener número de teléfono según la selección
+    const phoneNumbers = {
+        'franco': '1151772083',
+        'walter': '1171184502',
+        'fede': '1125958416'
+    };
+    
+    const whatsappNumber = phoneNumbers[contactChoice];
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     
     window.open(whatsappUrl, '_blank');
@@ -269,6 +277,40 @@ function generateWhatsAppMessage(formData) {
     return message;
 }
 
+// Función para solicitar información sobre servicios
+function solicitarInformacion() {
+    // Obtener el contacto seleccionado o usar Franco por defecto
+    const selectedContact = document.querySelector('input[name="contactChoice"]:checked');
+    const contactChoice = selectedContact ? selectedContact.value : 'franco';
+    
+    const phoneNumbers = {
+        'franco': '1151772083',
+        'walter': '1171184502',
+        'fede': '1125958416'
+    };
+    
+    const contactNames = {
+        'franco': 'Franco',
+        'walter': 'Walter',
+        'fede': 'Fede'
+    };
+    
+    const message = `¡Hola ${contactNames[contactChoice]}! Me gustaría recibir información detallada sobre sus servicios de lavado de autos.
+
+¿Podrían contarme más sobre:
+• Los diferentes tipos de lavado disponibles
+• Precios actualizados de servicios personalizados
+• Ubicaciones y horarios de atención
+• Cualquier promoción vigente
+
+¡Muchas gracias!`;
+    
+    const whatsappNumber = phoneNumbers[contactChoice];
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
+}
+
 // Funciones de utilidad
 function formatPrice(price) {
     return new Intl.NumberFormat('es-AR', {
@@ -290,8 +332,9 @@ function validateForm() {
     const vehicleModel = vehicleModelInput.value.trim();
     const vehicleType = vehicleTypeSelect.value;
     const washType = document.querySelector('input[name="washType"]:checked');
+    const contactChoice = document.querySelector('input[name="contactChoice"]:checked');
     
-    const isValid = vehicleModel && vehicleType && washType;
+    const isValid = vehicleModel && vehicleType && washType && contactChoice;
     
     const submitBtn = document.querySelector('.submit-btn');
     if (isValid) {
@@ -309,6 +352,9 @@ function validateForm() {
 vehicleModelInput.addEventListener('input', validateForm);
 vehicleTypeSelect.addEventListener('change', validateForm);
 washTypeInputs.forEach(input => {
+    input.addEventListener('change', validateForm);
+});
+contactChoiceInputs.forEach(input => {
     input.addEventListener('change', validateForm);
 });
 
