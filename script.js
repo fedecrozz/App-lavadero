@@ -1,18 +1,68 @@
-// Precios de los servicios
+// Precios de los servicios según tipo de vehículo
 const PRECIOS = {
-    estandar: 20000,
-    plus: 30000,
-    premium: 50000,
-    personalizado: {
-        base: 20000, // Precio base del lavado estándar incluido
-        'lavado-estandar': 0, // Ya incluido en la base
-        'limpieza-butacas': 0,
-        'limpieza-alfombras': 0,
-        'detallado-frenos': 0,
-        'pulido-opticas': 0,
-        'pulido-cera': 0,
-        'limpieza-techo': 0,
-        'lavado-motor': 0
+    moto: {
+        estandar: 15000,
+        plus: 25000, // No disponible para motos, pero por si acaso
+        premium: 40000, // No disponible para motos, pero por si acaso
+        personalizado: {
+            base: 15000,
+            'lavado-estandar': 0,
+            'limpieza-butacas': 0,
+            'limpieza-alfombras': 0,
+            'detallado-frenos': 0,
+            'pulido-opticas': 0,
+            'pulido-cera': 0,
+            'limpieza-techo': 0,
+            'lavado-motor': 0
+        }
+    },
+    auto: {
+        estandar: 20000,
+        plus: 30000,
+        premium: 50000,
+        personalizado: {
+            base: 20000,
+            'lavado-estandar': 0,
+            'limpieza-butacas': 0,
+            'limpieza-alfombras': 0,
+            'detallado-frenos': 0,
+            'pulido-opticas': 0,
+            'pulido-cera': 0,
+            'limpieza-techo': 0,
+            'lavado-motor': 0
+        }
+    },
+    suv: {
+        estandar: 23000,
+        plus: 28000,
+        premium: 45000,
+        personalizado: {
+            base: 23000,
+            'lavado-estandar': 0,
+            'limpieza-butacas': 0,
+            'limpieza-alfombras': 0,
+            'detallado-frenos': 0,
+            'pulido-opticas': 0,
+            'pulido-cera': 0,
+            'limpieza-techo': 0,
+            'lavado-motor': 0
+        }
+    },
+    pickup: {
+        estandar: 35000,
+        plus: 40000,
+        premium: 50000,
+        personalizado: {
+            base: 35000,
+            'lavado-estandar': 0,
+            'limpieza-butacas': 0,
+            'limpieza-alfombras': 0,
+            'detallado-frenos': 0,
+            'pulido-opticas': 0,
+            'pulido-cera': 0,
+            'limpieza-techo': 0,
+            'lavado-motor': 0
+        }
     }
 };
 
@@ -53,12 +103,16 @@ function initializeApp() {
     appointmentForm.addEventListener('submit', handleFormSubmit);
     
     // Inicializar con valores por defecto
+    updatePricesInHTML('auto'); // Inicializar con precios de auto
     updateSummary();
 }
 
 function handleVehicleTypeChange() {
     const vehicleType = vehicleTypeSelect.value;
     const washOptions = document.querySelectorAll('.wash-option');
+    
+    // Actualizar precios en las tarjetas
+    updatePricesInHTML(vehicleType);
     
     if (vehicleType === 'moto') {
         // Para motos, solo habilitar lavado estándar
@@ -89,6 +143,19 @@ function handleVehicleTypeChange() {
     }
     
     updateSummary();
+}
+
+function updatePricesInHTML(vehicleType = 'auto') {
+    // Actualizar precios en las tarjetas de lavado
+    const estandarPrice = document.querySelector('[data-type="estandar"] .price');
+    const plusPrice = document.querySelector('[data-type="plus"] .price');
+    const premiumPrice = document.querySelector('[data-type="premium"] .price');
+    const personalizadoPrice = document.querySelector('[data-type="personalizado"] .price');
+    
+    if (estandarPrice) estandarPrice.textContent = `$${PRECIOS[vehicleType].estandar.toLocaleString('es-AR')}`;
+    if (plusPrice) plusPrice.textContent = `$${PRECIOS[vehicleType].plus.toLocaleString('es-AR')}`;
+    if (premiumPrice) premiumPrice.textContent = `$${PRECIOS[vehicleType].premium.toLocaleString('es-AR')}`;
+    if (personalizadoPrice) personalizadoPrice.textContent = `Desde $${PRECIOS[vehicleType].personalizado.base.toLocaleString('es-AR')}`;
 }
 
 function handleWashTypeChange() {
@@ -165,21 +232,23 @@ function updateSummary() {
         
         // Calcular total
         let total = 0;
+        const vehicleType = vehicleTypeSelect.value || 'auto'; // Default a auto si no hay selección
+        
         if (selectedWashType.value === 'personalizado') {
-            // Empezar con el precio base (lavado estándar)
-            total = PRECIOS.personalizado.base;
+            // Empezar con el precio base (lavado estándar) según tipo de vehículo
+            total = PRECIOS[vehicleType].personalizado.base;
             
             // Agregar servicios adicionales cuando tengan precio
             const selectedServices = Array.from(customServiceInputs)
                 .filter(input => input.checked && input.id !== 'lavado-estandar');
             
             selectedServices.forEach(input => {
-                total += PRECIOS.personalizado[input.value] || 0;
+                total += PRECIOS[vehicleType].personalizado[input.value] || 0;
             });
             
             summaryTotal.textContent = `$${total.toLocaleString('es-AR')}`;
         } else {
-            total = PRECIOS[selectedWashType.value];
+            total = PRECIOS[vehicleType][selectedWashType.value];
             summaryTotal.textContent = `$${total.toLocaleString('es-AR')}`;
         }
     }
@@ -204,9 +273,9 @@ function handleFormSubmit(event) {
     
     // Obtener número de teléfono según la selección
     const phoneNumbers = {
-        'franco': '1151772083',
-        'walter': '1171184502',
-        'fede': '1125958416'
+        'franco': '5491151772083',
+        'walter': '5491171184502',
+        'fede': '5491125958416'
     };
     
     const whatsappNumber = phoneNumbers[contactChoice];
@@ -259,16 +328,16 @@ function generateWhatsAppMessage(formData) {
         }
         
         // Calcular subtotal para personalizado
-        let subtotal = PRECIOS.personalizado.base;
+        let subtotal = PRECIOS[vehicleType].personalizado.base;
         selectedServices.forEach(service => {
             if (service !== 'lavado-estandar') {
-                subtotal += PRECIOS.personalizado[service] || 0;
+                subtotal += PRECIOS[vehicleType].personalizado[service] || 0;
             }
         });
         
         message += `Subtotal: $${subtotal.toLocaleString('es-AR')}\n\n`;
     } else {
-        const subtotal = PRECIOS[washType];
+        const subtotal = PRECIOS[vehicleType][washType];
         message += `Subtotal: $${subtotal.toLocaleString('es-AR')}\n\n`;
     }
     
@@ -279,14 +348,14 @@ function generateWhatsAppMessage(formData) {
 
 // Función para solicitar información sobre servicios
 function solicitarInformacion() {
-    // Obtener el contacto seleccionado o usar Franco por defecto
+    // Obtener el contacto seleccionado o usar Fede por defecto
     const selectedContact = document.querySelector('input[name="contactChoice"]:checked');
-    const contactChoice = selectedContact ? selectedContact.value : 'franco';
+    const contactChoice = selectedContact ? selectedContact.value : 'fede';
     
     const phoneNumbers = {
-        'franco': '1151772083',
-        'walter': '1171184502',
-        'fede': '1125958416'
+        'franco': '5491151772083',
+        'walter': '5491171184502',
+        'fede': '5491125958416'
     };
     
     const contactNames = {
