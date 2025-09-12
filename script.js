@@ -26,14 +26,16 @@ const PRECIOS = {
         premium: 40000, // No disponible para motos, pero por si acaso
         personalizado: {
             base: 15000,
-            'lavado-estandar': 0,
-            'limpieza-butacas': 0,
-            'limpieza-alfombras': 0,
-            'detallado-frenos': 0,
-            'pulido-opticas': 0,
-            'pulido-cera': 0,
-            'limpieza-techo': 0,
-            'lavado-motor': 0
+            'lavado-estandar': 20000,
+            'limpieza-butacas': 15000,
+            'revividor-interior': 10000,
+            'abrillantado': 70000,
+            'pulido-opticas': 45000,
+            'pulido-cera': 5000,
+            'limpieza-techo': 15000,
+            'lavado-motor': 20000,
+            'detallado-interior': 40000,
+            'detallado-ruedas': 15000
         }
     },
     auto: {
@@ -42,14 +44,16 @@ const PRECIOS = {
         premium: 50000,
         personalizado: {
             base: 20000,
-            'lavado-estandar': 0,
-            'limpieza-butacas': 0,
-            'limpieza-alfombras': 0,
-            'detallado-frenos': 0,
-            'pulido-opticas': 0,
-            'pulido-cera': 0,
-            'limpieza-techo': 0,
-            'lavado-motor': 0
+            'lavado-estandar': 20000,
+            'limpieza-butacas': 15000,
+            'revividor-interior': 10000,
+            'abrillantado': 70000,
+            'pulido-opticas': 45000,
+            'pulido-cera': 5000,
+            'limpieza-techo': 15000,
+            'lavado-motor': 20000,
+            'detallado-interior': 40000,
+            'detallado-ruedas': 15000
         }
     },
     suv: {
@@ -58,14 +62,16 @@ const PRECIOS = {
         premium: 45000,
         personalizado: {
             base: 23000,
-            'lavado-estandar': 0,
-            'limpieza-butacas': 0,
-            'limpieza-alfombras': 0,
-            'detallado-frenos': 0,
-            'pulido-opticas': 0,
-            'pulido-cera': 0,
-            'limpieza-techo': 0,
-            'lavado-motor': 0
+            'lavado-estandar': 20000,
+            'limpieza-butacas': 15000,
+            'revividor-interior': 10000,
+            'abrillantado': 70000,
+            'pulido-opticas': 45000,
+            'pulido-cera': 5000,
+            'limpieza-techo': 15000,
+            'lavado-motor': 20000,
+            'detallado-interior': 40000,
+            'detallado-ruedas': 15000
         }
     },
     pickup: {
@@ -74,14 +80,16 @@ const PRECIOS = {
         premium: 50000,
         personalizado: {
             base: 35000,
-            'lavado-estandar': 0,
-            'limpieza-butacas': 0,
-            'limpieza-alfombras': 0,
-            'detallado-frenos': 0,
-            'pulido-opticas': 0,
-            'pulido-cera': 0,
-            'limpieza-techo': 0,
-            'lavado-motor': 0
+            'lavado-estandar': 20000,
+            'limpieza-butacas': 15000,
+            'revividor-interior': 10000,
+            'abrillantado': 70000,
+            'pulido-opticas': 45000,
+            'pulido-cera': 5000,
+            'limpieza-techo': 15000,
+            'lavado-motor': 20000,
+            'detallado-interior': 40000,
+            'detallado-ruedas': 15000
         }
     }
 };
@@ -239,11 +247,11 @@ function updateSummary() {
             const selectedServices = Array.from(customServiceInputs)
                 .filter(input => input.checked)
                 .map(input => input.nextElementSibling.textContent);
-            
             if (selectedServices.length > 0) {
-                summaryServicesList.textContent = selectedServices.join(', ');
+                summaryServicesList.innerHTML = selectedServices.map(s => `<li>${s}</li>`).join('');
                 summaryServices.style.display = 'flex';
             } else {
+                summaryServicesList.innerHTML = '';
                 summaryServices.style.display = 'none';
             }
         } else {

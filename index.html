@@ -129,35 +129,43 @@
                         <div class="custom-services-grid">
                             <div class="service-item base-service">
                                 <input type="checkbox" id="lavado-estandar" name="customServices" value="lavado-estandar" checked disabled>
-                                <label for="lavado-estandar">Lavado Estándar (Base) ✓</label>
+                                <label for="lavado-estandar">Lavado Estándar (Base)</label>
                             </div>
                             <div class="service-item">
                                 <input type="checkbox" id="limpieza-butacas" name="customServices" value="limpieza-butacas">
-                                <label for="limpieza-butacas">Limpieza de butacas</label>
+                                <label for="limpieza-butacas">Limpieza de asientos <span class="service-price">$15.000</span></label>
                             </div>
                             <div class="service-item">
-                                <input type="checkbox" id="limpieza-alfombras" name="customServices" value="limpieza-alfombras">
-                                <label for="limpieza-alfombras">Limpieza de alfombras</label>
+                                <input type="checkbox" id="revividor-interior" name="customServices" value="revividor-interior">
+                                <label for="revividor-interior">Revividor de plásticos interiores <span class="service-price">$10.000</span></label>
                             </div>
                             <div class="service-item">
-                                <input type="checkbox" id="detallado-frenos" name="customServices" value="detallado-frenos">
-                                <label for="detallado-frenos">Detallado de frenos</label>
+                                <input type="checkbox" id="abrillantado" name="customServices" value="abrillantado">
+                                <label for="abrillantado">Abrillantado de carrocería <span class="service-price">$70.000</span></label>
                             </div>
                             <div class="service-item">
                                 <input type="checkbox" id="pulido-opticas" name="customServices" value="pulido-opticas">
-                                <label for="pulido-opticas">Pulido de ópticas</label>
+                                <label for="pulido-opticas">Pulido de ópticas <span class="service-price">$45.000</span></label>
                             </div>
                             <div class="service-item">
                                 <input type="checkbox" id="pulido-cera" name="customServices" value="pulido-cera">
-                                <label for="pulido-cera">Pulido con cera</label>
+                                <label for="pulido-cera">Brillo extra con Cera <span class="service-price">$5.000</span></label>
                             </div>
                             <div class="service-item">
                                 <input type="checkbox" id="limpieza-techo" name="customServices" value="limpieza-techo">
-                                <label for="limpieza-techo">Limpieza de techo</label>
+                                <label for="limpieza-techo">Limpieza de techo <span class="service-price">$15.000</span></label>
                             </div>
                             <div class="service-item">
                                 <input type="checkbox" id="lavado-motor" name="customServices" value="lavado-motor">
-                                <label for="lavado-motor">Lavado de motor</label>
+                                <label for="lavado-motor">Lavado de motor <span class="service-price">$20.000</span></label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="detallado-interior" name="customServices" value="detallado-interior">
+                                <label for="detallado-interior">Detallado Interior <span class="service-price">$40.000</span></label>
+                            </div>
+                            <div class="service-item">
+                                <input type="checkbox" id="detallado-ruedas" name="customServices" value="detallado-ruedas">
+                                <label for="detallado-ruedas">Detallado de ruedas <span class="service-price">$15.000</span></label>
                             </div>
                         </div>
                     </div>
@@ -177,7 +185,7 @@
                                 </div>
                                 <div class="summary-item" id="summaryServices" style="display: none;">
                                     <span>Servicios adicionales:</span>
-                                    <span id="summaryServicesList">-</span>
+                                    <ul id="summaryServicesList" style="margin:0; padding-left:18px;"></ul>
                                 </div>
                                 <div class="summary-total">
                                     <span>Subtotal:</span>
@@ -230,7 +238,7 @@
 
                     <button type="submit" class="submit-btn">
                         <i class="fab fa-whatsapp"></i>
-                        Solicitar Turno por WhatsApp
+                        Continuar por WhatsApp
                     </button>
                 </form>
             </div>
