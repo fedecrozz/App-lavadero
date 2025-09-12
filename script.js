@@ -1,3 +1,23 @@
+// Marcar visualmente la opción de lavado seleccionada con borde verde
+function updateWashSelectionBorder() {
+    const washCards = document.querySelectorAll('.wash-card');
+    washCards.forEach(card => card.classList.remove('selected-wash'));
+    const checkedRadio = document.querySelector('input[name="washType"]:checked');
+    if (checkedRadio) {
+        const label = checkedRadio.closest('.wash-option').querySelector('.wash-card');
+        if (label) label.classList.add('selected-wash');
+    }
+}
+
+// Inicializar borde verde en la opción seleccionada al cargar
+document.addEventListener('DOMContentLoaded', function() {
+    updateWashSelectionBorder();
+    // ...existing code...
+    // Agregar evento para actualizar borde al cambiar selección
+    document.querySelectorAll('input[name="washType"]').forEach(input => {
+        input.addEventListener('change', updateWashSelectionBorder);
+    });
+});
 // Precios de los servicios según tipo de vehículo
 const PRECIOS = {
     moto: {
